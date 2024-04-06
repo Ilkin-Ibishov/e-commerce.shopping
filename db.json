@@ -1,0 +1,90 @@
+{
+  "homeCatalog": [
+    {
+      "newArrivals": {
+        "title": "New Arrivals",
+        "productCount": 4
+      },
+      "id": "15d8"
+    }
+  ],
+  "products": [
+    {
+      "id": "0001",
+      "productImage": "../../src/assets/ProductImages/Product01.png",
+      "productName": "T-SHIRT WITH TAPE DETAILS",
+      "productDescription": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+      "productRating": 4.5,
+      "productPrice": 120,
+      "productDiscountPercent": 0,
+      "productOldPrice": 0
+    },
+    {
+      "id": "0002",
+      "productImage": "../../src/assets/ProductImages/Product02.png",
+      "productName": "SKINNY FIT JEANS",
+      "productDescription": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+      "productRating": 4.5,
+      "productPrice": 240,
+      "productDiscountPercent": 20,
+      "productOldPrice": 260
+    },
+    {
+      "id": "0003",
+      "productImage": "../../src/assets/ProductImages/Product03.png",
+      "productName": "CHECKERED SHIRT",
+      "productDescription": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+      "productRating": 4.5,
+      "productPrice": 180,
+      "productDiscountPercent": 0,
+      "productOldPrice": 0
+    },
+    {
+      "productImage": "../../src/assets/ProductImages/Product04.png",
+      "productName": "SLEEVE STRIPED T-SHIRT",
+      "productPrice": "100",
+      "productOldPrice": 160,
+      "productDiscountPercent": 30,
+      "productRating": 4.5,
+      "productDescription": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+      "id": "0004"
+    }
+  ],
+  "cart": [
+    {
+      "id": "b22f",
+      "productID": "0003",
+      "amount": 2,
+      "product": {
+        "id": "0003",
+        "productImage": "../../src/assets/ProductImages/Product03.png",
+        "productName": "CHECKERED SHIRT",
+        "productDescription": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+        "productRating": 4.5,
+        "productPrice": 180,
+        "productDiscountPercent": 0,
+        "productOldPrice": 0
+      }
+    }
+  ],
+  "productAmount": {
+    "amount": 0
+  },
+  "discounts": [
+    {
+      "id": "b0c8",
+      "discountName": "Discount20",
+      "discountPercent": 20
+    },
+    {
+      "id": "7dc4",
+      "discountName": "Discount50",
+      "discountPercent": 50
+    },
+    {
+      "discountName": "Discount10",
+      "discountPercent": 10,
+      "id": "8e24"
+    }
+  ]
+}

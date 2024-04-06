@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input-bg{
+  background-color: #F0F0F0;
+}
+.left-x{
+  left: 90%;
+}
+.hero {
+  background-color: #F2F0F1;
+  ;
+}
+
+.faded-color{
+  color: #00000099;
+}
+
+.line-h{
+  border: 1px solid #0000001A;
+  width: 200px;
+  translate: 90deg;
+  height: 1px;
+}
+
+.homeCatalogStyle{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.oldPrice{
+  color: #00000066;
+  text-decoration:line-through;
+}
+.discount{
+  background: #FF33331A;
+  border-radius: 10px;
+  font-size: small;
+}
+
+.style-form label{
+  font-size: larger;
+  font-weight: 500;
+}
+
+.style-form input{
+  border: solid 1px black;
+  margin-bottom: 15px;
+  width: 350px;
+}
+
+.style-form textarea{
+  border: solid black 1px;
+}
+.inputWidth{
+  width: 22.9rem;
+}
+
+.input-transition{
+  transition: 0.3s ease;
+}
+
+.buyCount{
+  background: #F0F0F0;
+}
+
+.specificColor{
+  color: #00000099;
+}
+
+.nav-padding{
+  padding: 0 8%;
+}

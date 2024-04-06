@@ -1,0 +1,16 @@
+.nav-phone{
+    display: none;
+}
+.products-phone{
+
+}
+@media  screen and (max-width: 640px) {
+    .nav-phone {
+        display: block;
+    }
+    .navList {
+        display: none;
+    }
+
+  }
+
