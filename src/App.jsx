@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import SignUpLine from './components/SignUpLine'
-import NavigationBar from './components/NavigationBar'
-import Hero from './components/Hero'
-import HomeCatalog from './components/HomeCatalog'
+import SignUpLine from './components/site-interface/SignUpLine'
+import NavigationBar from './components/site-interface/NavigationBar'
+import Hero from './components/site-interface/Hero'
+import HomeCatalog from './components/site-interface/HomeCatalog'
 import AdminPanelEntrance from './components/AdminPanelEntrance'
 import AdminPanel from './components/Adminpanel';
-import ProductPage from "./components/ProductPage";
+import ProductPage from "./components/site-interface/ProductPage";
 import { useState } from "react";
-import CartPage from "./components/CartPage";
+import CartPage from "./components/site-interface/CartPage";
 
 
 function App() {

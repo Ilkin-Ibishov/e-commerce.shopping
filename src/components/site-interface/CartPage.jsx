@@ -1,77 +1,72 @@
 import SignUpLine from "./SignUpLine";
 import NavigationBar from "./NavigationBar";
-import CartDataFetcher from "./CartDataFetcher";
-import { useState, useEffect } from "react";
-import ProductDeleter from "./EditingProduct/DeleteProductFunction";
+import { useState, useEffect, useRef } from "react";
+import ProductDeleter from "../admin-panel/editing-product/DeleteProductFunction";
 import { Link } from "react-router-dom";
-import PostToCart from "./PostToCart";
+import requestFunction from "../SendRequest";
 
 export default function CartPage() {
     const [subtotal, setSubtotal] = useState(0)
     const [cartData, setCartData] = useState([]);
-    const [cartData2, setCartData2] = useState([]);
     const [discounts, setDiscounts] = useState([])
     const [selectedDiscount, setSelectedDiscount] = useState(0)
-    useEffect(() => {
-        setCartData(cartData);
-        fetchData()
-        setSubtotal(s=>0)
-        cartData.map((item, key)=>{
-            setSubtotal(s=>s +=item.product.productPrice * item.amount)
-        })
-
-    }, [cartData]);
+    let discountInput = useRef();
     
-    let fetchData=()=>{
+    useEffect(() => {
+            fetchData()
+            setSubtotal(s=>0)
+            cartData.forEach((item)=>{
+                setSubtotal(s=>s +=item.product.productPrice * item.amount)
+            })
+    }, [cartData]);
+    const fetchCartProduct = async () =>{
+        const fetchCartProduct = await requestFunction({destination: "cart", fetchMethod: "GET", id: '', data:undefined})
+            setCartData(fetchCartProduct);
+    }
+    useEffect(()=>{
+        fetchCartProduct()
+    },[])
+    let fetchData= ()=>{
         cartData.forEach((item, key) => {
-            let id = item.productID;
-            fetch(`http://localhost:3000/products/${id}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    const updatedCartData = [...cartData];
-                    updatedCartData[key].productInfo = data;
-                    setCartData2(updatedCartData);
-                })
-                .catch((error) => console.error("Error fetching product:", error));
-        });
-        fetch('http://localhost:3000/discounts')
-                .then((response) => response.json())
-                .then((data) => {
-                    const arr = data;
-                    setDiscounts(arr)
-                })
-                .catch((error) => console.error("Error fetching product:", error));
+            const fetchEachProduct = async () =>{
+                let productId = item.productID;
+                const fetchProductData = await requestFunction({destination: "products", fetchMethod: "GET", id: productId, data:undefined})
+                cartData[key].productInfo = fetchProductData;
+            }
+        fetchEachProduct();
+            }
+    );
+        const fetchDiscounts = async ()=>{
+            const fetchProductData = await requestFunction({destination: "discounts", fetchMethod: "GET", id: '', data:undefined})
+            setDiscounts(fetchProductData)
+        }
+        fetchDiscounts()
     }
     
     const handleCartProductDelete=(id)=>{
-        setCartData2(cartData2.filter((e)=>e.id !== id))
         setCartData(cartData.filter((e)=>e.id !== id))
-        PostToCart().setCartProductSAmount({condition: false})
     }
 
     const handleDiscount = () => {
-        let text = document.getElementById('discount-input').value;
-        const foundDiscount = discounts.find(discount => discount.hasOwnProperty(text));
+        let text = discountInput.current.value;
+        const foundDiscount = discounts.find(discount => discount.discountName === text);
         if (foundDiscount) {
-          setSelectedDiscount(foundDiscount[text]);
+          setSelectedDiscount(foundDiscount.discountPercent);
         } else {
           console.log("Discount code not found.");
           setSelectedDiscount([]);
         }
       };
-      
-    
     return (
         <>
-            <CartDataFetcher setData={setCartData} />
             <SignUpLine />
             <NavigationBar />
             <h1 className="text-4xl font-bold px-20">Your Cart</h1>
-            {cartData2.length>0? 
+            {cartData.length>0? 
             <div className="px-20 flex w-full gap-96">
                 <div className="flex flex-row justify-start">
                     <div>
-                        {cartData2.map((item, key) => (
+                        {cartData.map((item, key) => (
                             <div key={key} className=" flex py-5">
                                 {item.productInfo && item.productInfo.productName ? 
                                 <div className="flex flex-row gap-4 w-56">
@@ -112,12 +107,13 @@ export default function CartPage() {
                         </div>
                         <div className="promo-code flex items-center py-4">
                             <input
+                                ref={discountInput}
                                 id="discount-input"
                                 type="text"
                                 className="border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:border-gray-500"
                                 placeholder="Add promo code"
                             />
-                            <button onClick={handleDiscount} className="bg-black text-white py-2 px-4 rounded-r-lg hover:bg-gray-900">Apply</button>
+                            <button onClick={()=>handleDiscount()} className="bg-black text-white py-2 px-4 rounded-r-lg hover:bg-gray-900">Apply</button>
                         </div>
                         <button className=" bg-black rounded-3xl text-white py-2">Go to Checkout</button>
                         </div>

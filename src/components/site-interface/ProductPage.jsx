@@ -3,60 +3,45 @@ import { useParams } from "react-router-dom";
 import SignUpLine from './SignUpLine';
 import NavigationBar from './NavigationBar';
 import Rating from "./RatingCode";
-import plusIcon from "../assets/PlusCartButton.png"
-import minusIcon from "../assets/MinusCartButton.png"
-import PostToCart from "./PostToCart";
+import plusIcon from "../../assets/PlusCartButton.png"
+import minusIcon from "../../assets/MinusCartButton.png"
+import requestFunction from "../SendRequest";
 
 export default function ProductPage() {
+    const [increasedCount, setIncreasedCount] = useState(1);
     const [count, setCount] = useState(0);
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     
     useEffect(() => {
         setCount(0);
-        fetch(`http://localhost:3000/products/${id}`)
-            .then((response) => response.json())
-            .then((data) => {
-                setProduct(data);
-            })
-            .catch((error) => console.error("Error fetching product:", error));
+        const fetchProductData = async ()=>{
+            setProduct( await requestFunction({destination: "products", fetchMethod: "GET", id: id, data:undefined}))
+        }
+        fetchProductData();
     }, [id]);
-
     if (!product) {
         return <div>Loading...</div>;
     }
-    const addToCart= async ()=>{
+    const addToCart = async ()=>{
         if(count>0){
-            
-            PostToCart().getCartData().then((e)=>{
             function getProductInCart(item){
                 return item.productID === product.id
             }
-            let found = e.find(getProductInCart)
+            let found = await requestFunction({destination: "cart", fetchMethod: "GET", id: "", data:undefined})
+            found = found.find(getProductInCart)
             if(found === undefined){
-                PostToCart().setCartProductSAmount({condition: true})
-                PostToCart().setCartData({ data: {
-                    "productID": id,
-                    "amount": count,
-                    product
-                } });
+                await requestFunction({destination: "cart", fetchMethod: "POST", id: "", data: {"productID": id,"amount": count,product}})
             }else{
-                PostToCart().setCartProductAmount({
-                    data: {
-                        "productID": id,
-                        "amount": count + found.amount,
-                        product
-                    },
-                    id: found.id
-                })
+                await requestFunction({destination: "cart", fetchMethod: "PUT", id: found.id, data: {"productID": id,"amount": count + found.amount,product}})
             }
-            })
         }
+        setIncreasedCount(prevI=>prevI+1)
     }
     return (
         <>
             <SignUpLine />
-            <NavigationBar />
+            {increasedCount&&<NavigationBar />}
             <div className="flex flex-row">
                 <div className="w-1/2 flex justify-center"><img width={"444px"} height={"530px"} src={product.productImage} alt={product.productName} /></div>
                 <div className="w-1/2 px-5">

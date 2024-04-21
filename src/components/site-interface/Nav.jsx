@@ -1,4 +1,4 @@
-import downIcon from '../assets/DownIcon.svg'
+import downIcon from '../../assets/DownIcon.svg'
 
 
 export default function Nav(){

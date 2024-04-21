@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Rating from "./RatingCode";
-import ProductDataFetcher from "./ProductDataFetcher.jsx";
+import Rating from "./RatingCode.jsx";
+import ProductDataFetcher from "../ProductDataFetcher.jsx";
+import requestFunction from "../SendRequest"
 
 const HomeCatalog = () => {
     const [data, setData] = useState({});
     const [productData, setProductData] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3000/homeCatalog")
-            .then((response) => response.json())
-            .then((catalogData) => {
-                setData(catalogData[0].newArrivals);
-            })
-            .catch((error) => console.error("Error fetching home catalog data:", error));
+        const fetchProducts = async () => {
+        const CatalogProducts = await requestFunction({destination: "homeCatalog", fetchMethod: "GET", id: '', data:undefined})
+        setData(CatalogProducts.newArrivals)
+        }
+        fetchProducts();
     }, []);
 
     return (

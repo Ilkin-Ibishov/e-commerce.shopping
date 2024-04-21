@@ -1,6 +1,6 @@
 import Notification from './Notification';
 import { useState } from "react";
-import FetchData from "./PostProduct";
+import FetchData from "../PostProduct";
 
 export default function AddProductPanel(){
     const [showNotification, setShowNotification] = useState(false);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import DiscountFunctions from "./DiscountFunctions";
-import ProductDeleter from "./EditingProduct/DeleteProductFunction";
+import DiscountFunctions from "../DiscountFunctions";
+import ProductDeleter from "./editing-product/DeleteProductFunction";
 
 export default function EditDiscountsPanel() {
     const [discounts, setDiscounts] = useState([]);
@@ -43,8 +43,8 @@ export default function EditDiscountsPanel() {
     }
     
     return (
-        <div className="container mx-auto">
-            <h1 className="text-3xl font-bold mb-8">Current Discounts</h1>
+        <div className="container mx-auto p-5">
+            <h1 className="text-3xl font-bold mb-8 text-center">Current Discounts</h1>
             <div className="w-full bg-gray-100 p-6 rounded-lg shadow-md">
                 <div className="flex justify-between mb-4">
                     <span className="font-semibold">Name</span>

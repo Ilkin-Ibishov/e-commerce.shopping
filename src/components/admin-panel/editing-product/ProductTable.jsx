@@ -5,7 +5,6 @@ import GetProduct from './GetProduct';
 import { deepCopy } from './DeepCopy';
 import { Link } from "react-router-dom";
 
-
 function MyTable({ data, fetchProductData, editableData }) {
     const [tableData, setTableData] = useState([]);
     useEffect(() => {

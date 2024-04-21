@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import ProductDataFetcher from "./ProductDataFetcher";
+import ProductDataFetcher from "../ProductDataFetcher";
 import { Link } from "react-router-dom";
 
 export default function SearchNavBar({ setIsSpecificInputFocused }) {

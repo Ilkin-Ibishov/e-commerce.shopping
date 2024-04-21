@@ -1,5 +1,5 @@
 import React from 'react';
-import DeleteIcon from '../../assets/DeleteIcon.svg'
+import DeleteIcon from '../../../assets/DeleteIcon.svg'
 function ProductDeleter({ direct, productId }) {
   let output = <div></div>
   const deleteProduct = async () => {
