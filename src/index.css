@@ -53,14 +53,13 @@
 .style-form textarea{
   border: solid black 1px;
 }
-.inputWidth{
-  width: 22.9rem;
-}
-
 .input-transition{
-  transition: 0.3s ease;
+  width: 28rem;
+  transition: width 1000ms;
 }
-
+.input-width{
+  transition: width 1000ms;
+}
 .buyCount{
   background: #F0F0F0;
 }

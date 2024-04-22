@@ -11,6 +11,7 @@ const HomeCatalog = () => {
         const fetchProducts = async () => {
         const CatalogProducts = await requestFunction({destination: "homeCatalog", fetchMethod: "GET", id: '', data:undefined})
         setData(CatalogProducts.newArrivals)
+        setProductData( await requestFunction({destination: "products", fetchMethod: "GET", id: '', data:undefined}))
         }
         fetchProducts();
     }, []);
@@ -22,9 +23,9 @@ const HomeCatalog = () => {
                 <div className="grid lg:grid-cols-4 sm:grid-rows-4 gap-4 homeCatalogStyle">
                     {productData.map((product, idx) => (
                         <Link key={idx} to={`/${product.id}`}>
-                            <div>
-                                <img src={product.productImage} alt={product.productName} />
-                                <div className="flex flex-col w-5/6 justify-start items-start">
+                            <div className=" mx-auto">
+                                <img className="mx-auto" src={product.productImage} alt={product.productName} />
+                                <div className="flex flex-col w-5/6 justify-start items-start mx-auto sm:mx-0">
                                     <span className="text-lg font-bold text-nowrap">{product.productName}</span>
                                     <span className="flex flex-row">
                                         <Rating ratingCount={product.productRating} />

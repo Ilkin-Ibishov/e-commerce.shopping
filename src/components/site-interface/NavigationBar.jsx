@@ -18,25 +18,26 @@ export default function NavigationBar(){
         setCartProductCount(cartProducts.length)
     }
     getCartProductCount()
-    return <div className=" h-24 flex flex-row nav-padding items-center gap-24 w-full sticky top-0 bg-white z-10">
-        <img className="nav-phone" src={navbarPhone} alt="" />
-        <a href="/"><img  src={imgLogo} alt="" height="22px" width={"160px"} /></a>
-        <Nav />
-        <div className=" flex flex-row relative items-center navList">
-            <img src={searchIcon} alt="" className=" absolute left-2 " />
-            <SearchNavBar setIsSpecificInputFocused={setIsSpecificInputFocused} />
-        </div>
-        {
-            isSpecificInputFocused===false?
-        <div className="flex flex-row gap-4 relative">
-            <img src={searchIcon} alt="" className="relative left-2 sm:hidden" />
-            <Link to={"/cart"}><img src={cartIcon} alt="" height="24px" width={"24px"} /></Link>
-            {
-                cartProductCount >0?<span className=' absolute left-4 top-2 bg-red-500 text-white rounded-full p-1 m-0 text-xs leading-none'>{cartProductCount}</span>:undefined
-            }
-            
-            <img src={accountLogo} alt="" height="24px" width={"24px"} />
-        </div>:undefined
-        }
+    return <div className="flex justify-between items-center h-24 bg-white sticky top-0 z-10 px-10">
+    <div className="flex items-center gap-6">
+        <img className="h-10 sm:hidden " src={navbarPhone} alt="Phone Icon" />
+        <a href="/" className="flex-shrink-0 md:w-40 w-32">
+            <img src={imgLogo} alt="Logo" className="h-10" />
+        </a>
     </div>
+    <Nav />
+    <div className="flex items-center gap-6">
+        <SearchNavBar setIsSpecificInputFocused={setIsSpecificInputFocused} />
+        <Link to="/cart" className="relative">
+            <img src={cartIcon} alt="Cart Icon" className="h-10" />
+            {cartProductCount > 0 && (
+                <span className="absolute top-0 left-4 bg-red-500 text-white rounded-full px-2 py-1 text-xs">{cartProductCount}</span>
+            )}
+        </Link>
+        <button className="flex items-center gap-2">
+            <img src={accountLogo} alt="Account Icon" className="h-10" />
+        </button>
+    </div>
+</div>
+
 }

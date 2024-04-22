@@ -42,11 +42,11 @@ export default function ProductPage() {
         <>
             <SignUpLine />
             {increasedCount&&<NavigationBar />}
-            <div className="flex flex-row">
-                <div className="w-1/2 flex justify-center"><img width={"444px"} height={"530px"} src={product.productImage} alt={product.productName} /></div>
-                <div className="w-1/2 px-5">
-                    <h2 className="text-4xl font-bold">{product.productName}</h2>
-                    <span className=" flex flex-row my-5">
+            <div className="flex flex-col sm:flex-row w-screen h-screen">
+                <div className="sm:w-1/2 w-full flex justify-centee px-5"><img  className=" w-full h-full" src={product.productImage} alt={product.productName} /></div>
+                <div className="sm:w-1/2 w-full px-5">
+                    <h2 className="sm:text-4xl text-3xl font-bold">{product.productName}</h2>
+                    <span className=" flex flex-row py-5">
                       <Rating ratingCount={product.productRating} />
                       <span>{product.productRating}/5</span>
                     </span>
@@ -55,14 +55,14 @@ export default function ProductPage() {
                       {product.productOldPrice === 0 ? undefined :<span className="text-2xl font-bold oldPrice">${product.productOldPrice}</span> }
                       {product.productDiscountPercent === 0 ? undefined : <span className=" discount py-2 px-4 text-red-600">-{product.productDiscountPercent}%</span>}
                     </div>
-                    <div>{product.productDescription}</div>
-                    <div className="mt-20 flex flex-row gap-4">
+                    <div className=" my-5">{product.productDescription}</div>
+                    <div className="sm:mt-20 py-10 flex flex-row gap-4">
                         <div className="flex flex-row justify-center items-center buyCount gap-8 rounded-3xl px-4">
                             <button onClick={()=>takeCount((num)=>num>0 ? --num : 0)} className=" text-lg"><img src={minusIcon} alt="" /></button>
                             <div className=" text-lg font-medium">{count}</div>
                             <button onClick={()=>setCount((num)=>++num)} className=" text-lg"><img src={plusIcon} alt="" /></button>
                         </div>
-                        <span onClick={()=>addToCart()} className="px-28 py-4 border-black rounded-full bg-black border-2 text-white w-fit cursor-pointer duration-500 focus:bg-red-700 hover:bg-slate-700 hover:text-white">Add To Cart</span>
+                        <span onClick={()=>addToCart()} className="sm:px-28 px-5 py-4 border-black rounded-full bg-black border-2 text-white w-fit cursor-pointer duration-500 focus:bg-red-700 hover:bg-slate-700 hover:text-white text-nowrap">Add To Cart</span>
                     </div>
                 </div>
             </div>

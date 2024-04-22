@@ -3,7 +3,7 @@ import downIcon from '../../assets/DownIcon.svg'
 
 export default function Nav(){
     return <nav className='navList'>
-    <ul className="flex flex-row gap-4">
+    <ul className="flex flex-row gap-[20%] text-nowrap">
         <li className=" flex flex-row">Shop <img src={downIcon} alt="" /></li>
         <li>On Sale</li>
         <li>New Arrivals</li>

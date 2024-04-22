@@ -7,6 +7,7 @@ import requestFunction from "../SendRequest";
     const [inputValue, setInputValue] = useState('')
     const [productsData, setProductsData] = useState();
     const [searchedProducts, setSearchedProducts] = useState([]);
+    const [isFocused, setIsFocused] = useState(false)
     useEffect(()=>{
         const fetchProducts = async ()=>{
             setProductsData( await requestFunction({destination: "products", fetchMethod: "GET", id: '', data:undefined}))
@@ -26,8 +27,8 @@ import requestFunction from "../SendRequest";
         }
     }
     const checkSpecificInputFocus = () => {
-        const isFocused = document.activeElement === specificInputRef.current;
-        setIsSpecificInputFocused(isFocused);
+        setIsFocused(document.activeElement === specificInputRef.current);
+        setIsSpecificInputFocused(document.activeElement === specificInputRef.current);
     }
     
     const toLink=()=>{
@@ -42,10 +43,11 @@ import requestFunction from "../SendRequest";
                 onBlur={checkSpecificInputFocus}
                 onChange={handleSearching}
                 type="search"
-                className={`rounded-full h-12 px-10 input-bg navList w-full ${document.activeElement === specificInputRef.current ? 'inputWidth input-transition' : 'input-transition'}`}
+                className={`rounded-full h-12 px-10 pr-32 input-bg navList ] ${isFocused ? 'input-transition' : ''}`}
                 placeholder="Search for products..."
                 value={inputValue}
             />
+            
             {searchedProducts.length > 0 ? (
                 <div  className=" bg-white text-black h-48 absolute w-full overflow-y-auto border-4">
                     {searchedProducts.map((item, key) => (

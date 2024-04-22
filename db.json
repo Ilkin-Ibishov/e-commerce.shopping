@@ -73,6 +73,51 @@
         "productOldPrice": 260
       },
       "id": "47c1"
+    },
+    {
+      "id": "c7f3",
+      "productID": "0003",
+      "amount": 3,
+      "product": {
+        "productImage": "../../src/assets/ProductImages/Product03.png",
+        "productName": "zxczxc",
+        "productPrice": 180,
+        "productOldPrice": 0,
+        "productDiscountPercent": 0,
+        "productRating": 4.5,
+        "productDescription": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+        "id": "0003"
+      }
+    },
+    {
+      "id": "71b8",
+      "productID": "0001",
+      "amount": 3,
+      "product": {
+        "productImage": "../../src/assets/ProductImages/Product01.png",
+        "productName": "fdfvdfv",
+        "productPrice": "100",
+        "productOldPrice": 0,
+        "productDiscountPercent": 0,
+        "productRating": 4.5,
+        "productDescription": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+        "id": "0001"
+      }
+    },
+    {
+      "id": "d501",
+      "productID": "0004",
+      "amount": 4,
+      "product": {
+        "productImage": "../../src/assets/ProductImages/Product04.png",
+        "productName": "SLEEVE STRIPED T-SHIRT",
+        "productPrice": "100",
+        "productOldPrice": 160,
+        "productDiscountPercent": 30,
+        "productRating": 4.5,
+        "productDescription": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+        "id": "0004"
+      }
     }
   ],
   "productAmount": {
