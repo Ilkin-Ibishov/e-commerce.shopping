@@ -3,8 +3,8 @@ import SignUpLine from './components/site-interface/SignUpLine'
 import NavigationBar from './components/site-interface/NavigationBar'
 import Hero from './components/site-interface/Hero'
 import HomeCatalog from './components/site-interface/HomeCatalog'
-import AdminPanelEntrance from './components/AdminPanelEntrance'
-import AdminPanel from './components/Adminpanel';
+import AdminPanelEntrance from './components/admin-panel/AdminPanelEntrance'
+import Adminpanel from './components/admin-panel/Adminpanel';
 import ProductPage from "./components/site-interface/ProductPage";
 import { useState } from "react";
 import CartPage from "./components/site-interface/CartPage";
@@ -24,7 +24,7 @@ function App() {
           <HomeCatalog />
           <AdminPanelEntrance  dest="/adminpanel" text="Go to Admin panel" />
         </div>} />
-          <Route path="adminpanel" element={<AdminPanel />} />
+          <Route path="adminpanel" element={<Adminpanel />} />
           <Route path="/:id" element={<ProductPage />} />
           <Route path="/cart" element={<CartPage />} />
       </Routes>

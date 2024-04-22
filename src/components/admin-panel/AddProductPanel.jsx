@@ -1,11 +1,8 @@
 import Notification from './Notification';
 import { useState } from "react";
-import FetchData from "../PostProduct";
-
+import requestFunction from '../SendRequest';
 export default function AddProductPanel(){
     const [showNotification, setShowNotification] = useState(false);
-    
-    // New product data
     const [newProductData, setNewProductData] = useState({
         productImage: "",
         productName: "",
@@ -36,12 +33,12 @@ export default function AddProductPanel(){
 
 
     // Function to handle form submission
-    const postNewProduct = (event) => {
+    const postNewProduct = async (event) => {
         const percent = parseInt(newProductData.productOldPrice) > 0 ? 100 - (parseInt(newProductData.productPrice) * 100 / parseInt(newProductData.productOldPrice)) : 0;
         const updatedProductData = { ...newProductData, productDiscountPercent: percent };
         setNewProductData(updatedProductData);
         event.preventDefault();
-        FetchData({ newProductData: updatedProductData });
+        await requestFunction({destination: "products", fetchMethod: "POST", id: '', data:updatedProductData})
         setShowNotification(true);
         // Reset form fields after submission
         setNewProductData({

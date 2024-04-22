@@ -1,14 +1,19 @@
-import { useState, useRef } from "react";
-import ProductDataFetcher from "../ProductDataFetcher";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import requestFunction from "../SendRequest";
 
-export default function SearchNavBar({ setIsSpecificInputFocused }) {
+ const SearchNavBar= ({ setIsSpecificInputFocused })=> {
     const specificInputRef = useRef(null);
     const [inputValue, setInputValue] = useState('')
     const [productsData, setProductsData] = useState();
     const [searchedProducts, setSearchedProducts] = useState([]);
-    
-    function searching(event) {
+    useEffect(()=>{
+        const fetchProducts = async ()=>{
+            setProductsData( await requestFunction({destination: "products", fetchMethod: "GET", id: '', data:undefined}))
+        }
+        fetchProducts();
+    }, [])
+    const handleSearching = async (event)=>{
         const newValue = event.target.value;
         setInputValue(newValue)
         if (newValue !== ''){
@@ -31,12 +36,11 @@ export default function SearchNavBar({ setIsSpecificInputFocused }) {
     }
     return (
         <div>
-            <ProductDataFetcher setData={setProductsData} />
             <input
                 ref={specificInputRef}
                 onFocus={checkSpecificInputFocus}
                 onBlur={checkSpecificInputFocus}
-                onChange={searching}
+                onChange={handleSearching}
                 type="search"
                 className={`rounded-full h-12 px-10 input-bg navList w-full ${document.activeElement === specificInputRef.current ? 'inputWidth input-transition' : 'input-transition'}`}
                 placeholder="Search for products..."
@@ -62,3 +66,5 @@ export default function SearchNavBar({ setIsSpecificInputFocused }) {
         </div>
     );
 }
+
+export default SearchNavBar;

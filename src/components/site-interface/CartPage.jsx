@@ -103,7 +103,7 @@ export default function CartPage() {
                         </div >
                         <div className="flex justify-between">
                                 <span  className=" font-semibold text-xl">Total</span>
-                                <span className=" font-semibold text-xl">${subtotal - subtotal*selectedDiscount/100 + 15}</span>
+                                <span className=" font-semibold text-xl">${parseFloat((subtotal - subtotal*selectedDiscount/100 + 15).toFixed(2))}</span>
                         </div>
                         <div className="promo-code flex items-center py-4">
                             <input

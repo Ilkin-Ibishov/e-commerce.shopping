@@ -1,45 +1,46 @@
-import { useEffect, useState } from "react";
-import DiscountFunctions from "../DiscountFunctions";
+import { useEffect, useRef, useState } from "react";
 import ProductDeleter from "./editing-product/DeleteProductFunction";
+import requestFunction from "../SendRequest";
 
 export default function EditDiscountsPanel() {
+    const newDiscountName = useRef();
+    const newDiscountPercent = useRef();
+    const editedDiscountName = useRef();
+    const editedDiscountPercent = useRef();
     const [discounts, setDiscounts] = useState([]);
     const [isAddNewActive, setAddNewActive] = useState(false)
     const [isEditOn, setEditOn] = useState(false)
     const [currentRow, setCurrentRow] = useState(undefined)
-    const handleSaveNew=()=>{
-        let newDiscountName = document.getElementById('newDiscountName').value;
-        let percent = Number(document.getElementById('newDiscountPercent').value)
+    const handleSaveNew= async()=>{
         let newDiscount = {
-            discountName: newDiscountName,
-            discountPercent: percent
+            discountName: newDiscountName.current.value,
+            discountPercent: Number(newDiscountPercent.current.value)
         }
-        DiscountFunctions().addNewDiscount({newDiscountData: newDiscount})
+        await requestFunction({destination: "discounts", fetchMethod: "POST", id: '', data:newDiscount})
         handleAddNew()
+        setDiscounts( await requestFunction({destination: "discounts", fetchMethod: "GET", id: '', data:undefined}))
     }
     const handleEditOn=(index)=>{
         setCurrentRow(index)
         setEditOn(!isEditOn)
     }
     useEffect(() => {
-        fetch("http://localhost:3000/discounts")
-            .then((response) => response.json())
-            .then((data) => {
-                setDiscounts(data);
-            })
-            .catch((error) => console.error("Error fetching discount data:", error));
-    }, [handleSaveNew]);
+        const fetchDiscounts = async()=>{
+            setDiscounts( await requestFunction({destination: "discounts", fetchMethod: "GET", id: '', data:undefined}))
+
+        }
+        fetchDiscounts()
+    }, []);
     
     const handleAddNew=()=>{setAddNewActive(!isAddNewActive)}
-    const handleSave=(id)=>{
-        let newDiscountName = document.getElementById('editedDiscountName').value;
-        let percent = Number(document.getElementById('editedDiscountPercent').value)
+    const handleSave=async(id)=>{
         let editedDiscount = {
-            discountName: newDiscountName,
-            discountPercent: percent
+            discountName: editedDiscountName.current.value,
+            discountPercent: editedDiscountPercent.current.value
         }
-        DiscountFunctions().editCurrentDiscount({id:id, data:editedDiscount})
+        await requestFunction({destination: "discounts", fetchMethod: "PUT", id: id, data:editedDiscount})
         handleEditOn(undefined)
+        setDiscounts( await requestFunction({destination: "discounts", fetchMethod: "GET", id: '', data:undefined}))
     }
     
     return (
@@ -55,9 +56,9 @@ export default function EditDiscountsPanel() {
                     <div key={index} className="flex justify-between mb-4">
                         {currentRow===index?
                             <div className="w-full flex justify-between">
-                                <input className="w-1/3 border border-gray-300 px-2 py-1" type="text" defaultValue={item.discountName} id="editedDiscountName" />
+                                <input className="w-1/3 border border-gray-300 px-2 py-1" type="text" defaultValue={item.discountName} ref={editedDiscountName} />
                                 <div>
-                                    <input className="border border-gray-300 px-2 py-1" defaultValue={item.discountPercent} type="number" id="editedDiscountPercent" />
+                                    <input className="border border-gray-300 px-2 py-1" defaultValue={item.discountPercent} type="number" ref={editedDiscountPercent} />
                                     <button onClick={()=>handleSave(item.id)} className="px-4 py-1 bg-green-500 text-white ml-2">Save</button>
                                     <button onClick={()=>handleEditOn(undefined)} className="px-4 py-1 bg-red-500 text-white ml-2">Cancel</button>   
                                 </div>
@@ -78,9 +79,9 @@ export default function EditDiscountsPanel() {
                     <button onClick={handleAddNew} className="bg-black text-white py-2 px-4 w-full mt-4">Add new</button>:
                     <div className="mt-4">
                         <div className="flex justify-between">
-                            <input id="newDiscountName" className="border border-gray-300 px-2 py-1 w-1/3" type="text" />
+                            <input ref={newDiscountName} className="border border-gray-300 px-2 py-1 w-1/3" type="text" />
                             <div className="flex justify-between w-1/4">
-                                <input id="newDiscountPercent" className="border border-gray-300 px-2 py-1 w-3/4" type="number" />
+                                <input ref={newDiscountPercent} className="border border-gray-300 px-2 py-1 w-3/4" type="number" />
                                 <button onClick={handleAddNew} className="px-4 py-1 bg-red-500 text-white ml-2">Cancel</button>
                             </div>
                         </div>

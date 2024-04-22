@@ -10,7 +10,7 @@ import requestFunction from "../SendRequest";
 export default function ProductPage() {
     const [increasedCount, setIncreasedCount] = useState(1);
     const [count, setCount] = useState(0);
-    const { id } = useParams();
+    const { id }  = useParams();
     const [product, setProduct] = useState(null);
     
     useEffect(() => {

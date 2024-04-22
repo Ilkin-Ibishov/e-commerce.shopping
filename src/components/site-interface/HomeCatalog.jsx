@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Rating from "./RatingCode.jsx";
-import ProductDataFetcher from "../ProductDataFetcher.jsx";
 import requestFunction from "../SendRequest"
 
 const HomeCatalog = () => {
@@ -18,7 +17,6 @@ const HomeCatalog = () => {
 
     return (
         <>
-            <ProductDataFetcher setData={setProductData} />
             <div className="text-center flex flex-col justify-center items-center">
                 <div className="text-5xl font-bold my-10">{data.title}</div>
                 <div className="grid lg:grid-cols-4 sm:grid-rows-4 gap-4 homeCatalogStyle">

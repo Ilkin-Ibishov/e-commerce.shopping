@@ -1,9 +1,8 @@
-
 import AdminPanelEntrance from "./AdminPanelEntrance";
-import AddProductPanel from "./admin-panel/AddProductPanel";
-import EditProductPanel from "./admin-panel/editing-product/EditProductPanel";
+import AddProductPanel from "./AddProductPanel";
+import EditProductPanel from "./editing-product/EditProductPanel";
 import { useState } from "react";
-import EditDiscountsPanel from "./admin-panel/EditDiscountsPanel";
+import EditDiscountsPanel from "./EditDiscountsPanel";
 export default function AdminPanel() {
     const panelNavClassName = `cursor-pointer font-semibold text-lg p-6 border-4 rounded-r-md w-full h-fit border-white `
     const panelNavClassNameCheck = `cursor-pointer font-semibold text-lg p-6 border-4 rounded-r-md w-full h-fit border-white bg-gray-600`
