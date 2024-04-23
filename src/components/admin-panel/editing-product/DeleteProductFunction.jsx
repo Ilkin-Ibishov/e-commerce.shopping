@@ -19,7 +19,7 @@ function ProductDeleter({ direct, productId }) {
   if(direct==='products'){
     output = <button onClick={deleteProduct}>Delete Product</button>
   }if(direct==='cart'){
-    output = <span onClick={deleteProduct} className=" absolute top-0 left-72 w-5 h-5 cursor-pointer"><img src={DeleteIcon} alt="Delete Icon" /></span>
+    output = <span onClick={deleteProduct} ><img src={DeleteIcon} alt="Delete Icon" /></span>
   }if(direct==='discounts'){
     output = <span onClick={deleteProduct}>Delete</span>
   }

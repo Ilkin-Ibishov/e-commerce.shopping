@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import requestFunction from "../SendRequest";
+import searchIcon from '../../assets/SearchIcon.svg'
 
  const SearchNavBar= ({ setIsSpecificInputFocused })=> {
     const specificInputRef = useRef(null);
@@ -36,7 +37,8 @@ import requestFunction from "../SendRequest";
         setInputValue('')
     }
     return (
-        <div>
+        <div className=" flex">
+            <img className='navList relative left-10' src={searchIcon} alt="Search Icon" />
             <input
                 ref={specificInputRef}
                 onFocus={checkSpecificInputFocus}

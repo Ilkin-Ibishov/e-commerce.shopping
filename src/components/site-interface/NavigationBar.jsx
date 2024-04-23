@@ -28,15 +28,18 @@ export default function NavigationBar(){
     <Nav />
     <div className="flex items-center gap-6">
         <SearchNavBar setIsSpecificInputFocused={setIsSpecificInputFocused} />
-        <Link to="/cart" className="relative">
-            <img src={cartIcon} alt="Cart Icon" className="h-10" />
+        <img className='sm:hidden block' src={searchIcon} alt="Search Icon" />
+        {!isSpecificInputFocused?<div className='flex gap-4'>
+            <Link to="/cart" className="relative">
+            <img src={cartIcon} alt="Cart Icon" className="h-6" />
             {cartProductCount > 0 && (
                 <span className="absolute top-0 left-4 bg-red-500 text-white rounded-full px-2 py-1 text-xs">{cartProductCount}</span>
             )}
         </Link>
         <button className="flex items-center gap-2">
-            <img src={accountLogo} alt="Account Icon" className="h-10" />
+            <img src={accountLogo} alt="Account Icon" className="h-6" />
         </button>
+        </div>:undefined}
     </div>
 </div>
 

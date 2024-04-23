@@ -61,21 +61,21 @@ export default function CartPage() {
         <>
             <SignUpLine />
             <NavigationBar />
-            <h1 className="text-4xl font-bold px-20">Your Cart</h1>
+            <h1 className="text-4xl font-bold sm:px-20 px-5">Your Cart</h1>
             {cartData.length>0? 
-            <div className="px-20 flex w-full gap-96">
-                <div className="flex flex-row justify-start">
+            <div className="sm:px-20 px-2 flex sm:gap-96 gap-10 sm:flex-row flex-col">
+                <div className="flex flex-row sm:justify-start px-0 w-fit">
                     <div>
                         {cartData.map((item, key) => (
                             <div key={key} className=" flex py-5">
                                 {item.productInfo && item.productInfo.productName ? 
-                                <div className="flex flex-row gap-4 w-56">
+                                <div className="flex flex-row gap-4 w-fit">
                                     <img className=" w-32 h-32" src={item.productInfo.productImage} alt="" />
                                     <div className="relative m-2">
-                                        <Link to={`/${item.productInfo.id}`}><span className=" absolute top-0 left-0 text-lg font-bold text-nowrap">{item.productInfo.productName}</span></Link>
+                                        <Link to={`/${item.productInfo.id}`}><span className=" absolute top-0 left-0 sm:text-lg text-sm font-bold text-nowrap">{item.productInfo.productName}</span></Link>
                                         <span className=" absolute bottom-0 left-0 text-xl font-bold text-nowrap">${item.productInfo.productPrice}</span>
-                                        <div onClick={()=>handleCartProductDelete(item.id)}><ProductDeleter direct={'cart'} productId={item.id} /></div>
-                                        <span className=" absolute left-72 bottom-0">{item.amount}</span>
+                                        <div className=" absolute top-0 sm:left-72 left-0 w-5 h-5 cursor-pointer" onClick={()=>handleCartProductDelete(item.id)}><ProductDeleter  direct={'cart'} productId={item.id} /></div>
+                                        <span className=" absolute sm:left-72 left-20 bottom-0">{item.amount}</span>
                                     </div>
                                 </div>
                                 : undefined}
@@ -84,7 +84,7 @@ export default function CartPage() {
                     </div>
                     
                 </div>
-                <div className=" flex flex-col">
+                <div className=" flex flex-col sm:w-auto w-screen px-4">
                         <h3 className=" font-medium text-2xl">Order Summary</h3>
                         <div className=" my-8">
                         <div className="flex justify-between">

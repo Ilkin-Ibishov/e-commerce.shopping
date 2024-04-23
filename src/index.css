@@ -55,7 +55,7 @@
 }
 .input-transition{
   width: 28rem;
-  transition: width 1000ms;
+  transition: width 10s;
 }
 .input-width{
   transition: width 1000ms;
